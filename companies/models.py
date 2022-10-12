@@ -1,10 +1,11 @@
 from django.db import models
 
+
 class Company(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'companies'
+        db_table = "companies"
 
     def __str__(self):
         return self.name

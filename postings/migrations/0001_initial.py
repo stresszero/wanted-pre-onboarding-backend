@@ -9,49 +9,96 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('companies', '0001_initial'),
+        ("companies", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Area',
+            name="Area",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
             options={
-                'db_table': 'areas',
+                "db_table": "areas",
             },
         ),
         migrations.CreateModel(
-            name='Country',
+            name="Country",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
             options={
-                'db_table': 'countries',
+                "db_table": "countries",
             },
         ),
         migrations.CreateModel(
-            name='JobPosting',
+            name="JobPosting",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.CharField(max_length=100)),
-                ('reward', models.PositiveIntegerField(default=0)),
-                ('tech', models.CharField(max_length=100)),
-                ('content', models.TextField()),
-                ('area', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='postings.area')),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='job_postings', to='companies.company')),
-                ('country', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='postings.country')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.CharField(max_length=100)),
+                ("reward", models.PositiveIntegerField(default=0)),
+                ("tech", models.CharField(max_length=100)),
+                ("content", models.TextField()),
+                (
+                    "area",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="postings.area",
+                    ),
+                ),
+                (
+                    "company",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="job_postings",
+                        to="companies.company",
+                    ),
+                ),
+                (
+                    "country",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="postings.country",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'job_postings',
+                "db_table": "job_postings",
             },
         ),
         migrations.AddField(
-            model_name='area',
-            name='country',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='postings.country'),
+            model_name="area",
+            name="country",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="postings.country"
+            ),
         ),
     ]

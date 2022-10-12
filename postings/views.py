@@ -35,7 +35,7 @@ class JobPostingView(View):
         posting.delete()
         return JsonResponse({'message': 'Posting deleted'}, status=200)
 
-    def put(self, request, posting_id):
+    def patch(self, request, posting_id):
         data = json.loads(request.body)
         posting = get_job_posting_or_404(posting_id)
 
@@ -66,7 +66,7 @@ def get_job_postings(request):
         | Q(position__icontains=search) \
         | Q(tech__icontains=search)
     
-    postings = JobPosting.objects.filter(q)
+    postings = JobPosting.objects.filter(q).select_related('company', 'country', 'area')
     results = [{
         'posting_id'  : posting.id,
         'company_name': posting.company.name,

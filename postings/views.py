@@ -39,12 +39,16 @@ class JobPostingView(View):
         data = json.loads(request.body)
         posting = get_job_posting_or_404(posting_id)
 
+        if "company" in data.keys() or "company_id" in data.keys():
+            return JsonResponse({'message': 'Invalid input'}, status=400)
+
         for attr, value in data.items():
             if value:
                 if hasattr(posting, attr):
                     setattr(posting, attr, value)
                 else:
                     return JsonResponse({'message': 'Invalid input'}, status=400)
+
         posting.save()
         return JsonResponse({'message': 'Posting updated'}, status=200)
 
